@@ -1,3 +1,3 @@
-ln -fns ./.vimrc.before.local ~/.vimrc.before.local
-ln -fns ./.zshrc ~/.zshrc
-ln -fns ./.tmux.conf ~/.tmux.conf
+ln -fs ~/dotfiles/.vimrc.before.local ~/.vimrc.before.local
+ln -fs ~/dotfiles/.zshrc ~/.zshrc
+ln -fs ~/dotfiles/.tmux.conf ~/.tmux.conf
