@@ -1,3 +1,16 @@
 let g:airline_powerline_fonts=1
-let g:spf13_bundle_groups=['general', 'writing', 'neocomplcache', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc','go']
+let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc','go']
 :imap jk <Esc>
+" remap as we use commands frequently
+:noremap ; :
+
+let g:indent_guides_guide_size  = 2
+" Set Indent Guides plugin colors for Solarized
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=236
+" indentation settings for various file types
+autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+" syntastic checker also runs ruboco"
+let g:syntastic_ruby_checkers = ["mri","rubocop"]
