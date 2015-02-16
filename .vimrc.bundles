@@ -1,0 +1,138 @@
+" Modeline and Notes {
+" vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker spell:
+" this is colleciton of bundles used by me, originally copied from spf13
+" distribution
+" }
+
+" Environment {
+
+    " Basics {
+        set nocompatible        " Must be first line
+        set background=dark     " Assume a dark background
+    " }
+
+    " Setup Bundle Support {
+        " The next three lines ensure that the ~/.vim/bundle/ system works
+        filetype off
+        set rtp+=~/.vim/bundle/Vundle.vim
+        call vundle#rc()
+    " }
+" }
+
+" Deps {
+    Bundle 'gmarik/vundle'
+    Bundle 'MarcWeber/vim-addon-mw-utils'
+    Bundle 'tomtom/tlib_vim'
+    Bundle 'mileszs/ack.vim'
+" }
+
+" General {
+    Bundle 'scrooloose/nerdtree'
+    Bundle 'altercation/vim-colors-solarized'
+    Bundle 'spf13/vim-colors'
+    Bundle 'tpope/vim-surround'
+    Bundle 'tpope/vim-repeat'
+    Bundle 'spf13/vim-autoclose'
+    Bundle 'ctrlpvim/ctrlp.vim'
+    Bundle 'tacahiroy/ctrlp-funky'
+    Bundle 'terryma/vim-multiple-cursors'
+    Bundle 'vim-scripts/sessionman.vim'
+    Bundle 'matchit.zip'
+    Bundle 'bling/vim-airline'
+    Bundle 'bling/vim-bufferline'
+    Bundle 'Lokaltog/vim-easymotion'
+    Bundle 'jistr/vim-nerdtree-tabs'
+    Bundle 'flazz/vim-colorschemes'
+    Bundle 'mbbill/undotree'
+    Bundle 'nathanaelkane/vim-indent-guides'
+    Bundle 'mhinz/vim-signify'
+    Bundle 'tpope/vim-abolish.git'
+    Bundle "tpope/vim-unimpaired"
+    Bundle 'osyo-manga/vim-over'
+    Bundle 'kana/vim-textobj-user'
+    Bundle 'kana/vim-textobj-indent'
+    Bundle 'gcmt/wildfire.vim'
+" }
+
+" Writing {
+    Bundle 'reedes/vim-litecorrect'
+    Bundle 'reedes/vim-textobj-sentence'
+    Bundle 'reedes/vim-textobj-quote'
+    Bundle 'reedes/vim-wordy'
+" }
+
+" General Programming {
+    " Pick one of the checksyntax, jslint, or syntastic
+    Bundle 'scrooloose/syntastic'
+    Bundle 'tpope/vim-fugitive'
+    Bundle 'mattn/webapi-vim'
+    Bundle 'mattn/gist-vim'
+    Bundle 'scrooloose/nerdcommenter'
+    Bundle 'tpope/vim-commentary'
+    Bundle 'godlygeek/tabular'
+    Bundle 'majutsushi/tagbar'
+" }
+
+" Snippets & AutoComplete {
+    Bundle 'Valloric/YouCompleteMe'
+    Bundle 'SirVer/ultisnips'
+    Bundle 'honza/vim-snippets'
+" }
+
+" Python {
+    " Pick either python-mode or pyflakes & pydoc
+    Bundle 'klen/python-mode'
+    Bundle 'yssource/python.vim'
+    Bundle 'python_match.vim'
+    Bundle 'pythoncomplete'
+" }
+
+" Javascript {
+    Bundle 'elzr/vim-json'
+    Bundle 'groenewege/vim-less'
+    Bundle 'pangloss/vim-javascript'
+    Bundle 'briancollins/vim-jst'
+    Bundle 'kchmck/vim-coffee-script'
+" }
+
+" HTML {
+    Bundle 'amirh/HTML-AutoCloseTag'
+    Bundle 'hail2u/vim-css3-syntax'
+    Bundle 'gorodinskiy/vim-coloresque'
+    Bundle 'tpope/vim-haml'
+" }
+
+" Ruby {
+    Bundle 'tpope/vim-rails'
+    Bundle "nelstrom/vim-textobj-rubyblock"
+    Bundle "vim-ruby/vim-ruby"
+    Bundle "thoughtbot/vim-rspec"
+" }
+
+" Go Lang {
+    "Bundle 'Blackrush/vim-gocode'
+    Bundle 'fatih/vim-go'
+" }
+
+" Elixir {
+    Bundle 'elixir-lang/vim-elixir'
+    Bundle 'carlosgaldino/elixir-snippets'
+    Bundle 'mattreduce/vim-mix'
+" }
+
+" Misc {
+    Bundle 'wting/rust.vim'
+    Bundle 'tpope/vim-markdown'
+    Bundle 'spf13/vim-preview'
+    Bundle 'tpope/vim-cucumber'
+    Bundle 'cespare/vim-toml'
+    Bundle 'quentindecock/vim-cucumber-align-pipes'
+    Bundle 'saltstack/salt-vim'
+    Bundle "editorconfig/editorconfig-vim"
+    Bundle "mustache/vim-mustache-handlebars"
+    " for {} -> do - end conversion
+    Bundle "slim-template/vim-slim.git"
+    Bundle "AndrewRadev/splitjoin.vim"
+    " for sending commands to tmux session
+    Bundle "jgdavey/tslime.vim"
+" }

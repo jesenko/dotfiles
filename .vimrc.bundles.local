@@ -1,3 +1,0 @@
-Bundle "editorconfig/editorconfig-vim"
-Bundle "nelstrom/vim-textobj-rubyblock"
-Bundle "mustache/vim-mustache-handlebars"
