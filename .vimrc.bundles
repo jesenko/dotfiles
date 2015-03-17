@@ -52,6 +52,9 @@
     Bundle 'kana/vim-textobj-user'
     Bundle 'kana/vim-textobj-indent'
     Bundle 'gcmt/wildfire.vim'
+    " for handling sessions
+    Bundle 'xolox/vim-misc'
+    Bundle 'xolox/vim-session'
 " }
 
 " Writing {
@@ -67,8 +70,7 @@
     Bundle 'tpope/vim-fugitive'
     Bundle 'mattn/webapi-vim'
     Bundle 'mattn/gist-vim'
-    Bundle 'scrooloose/nerdcommenter'
-    Bundle 'tpope/vim-commentary'
+    Bundle 'tomtom/tcomment_vim'
     Bundle 'godlygeek/tabular'
     Bundle 'majutsushi/tagbar'
 " }
@@ -91,6 +93,7 @@
     Bundle 'elzr/vim-json'
     Bundle 'groenewege/vim-less'
     Bundle 'pangloss/vim-javascript'
+    Bundle 'jelera/vim-javascript-syntax'
     Bundle 'briancollins/vim-jst'
     Bundle 'kchmck/vim-coffee-script'
 " }
@@ -106,7 +109,7 @@
     Bundle 'tpope/vim-rails'
     Bundle "nelstrom/vim-textobj-rubyblock"
     Bundle "vim-ruby/vim-ruby"
-    Bundle "thoughtbot/vim-rspec"
+    Bundle 'geekjuice/vim-spec'
 " }
 
 " Go Lang {

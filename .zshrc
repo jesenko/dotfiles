@@ -49,7 +49,6 @@ plugins=(git rails ruby tmux)
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -58,6 +57,8 @@ export EDITOR='vim'
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 alias rake='noglob rake'
+# Reinstalls npm and bower dependencies
+alias nombom='npm cache clear && bower cache clean && rm -rf node_modules bower_components && npm install && bower install'
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'

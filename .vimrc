@@ -156,7 +156,9 @@
     set scrolloff=3                 " Minimum lines to keep above and below cursor
     set foldenable                  " Auto fold code
     set foldmethod=syntax
-    set foldlevelstart=1
+    " set initial fold level to max, see
+    " http://superuser.com/questions/567352/how-can-i-set-foldlevelstart-in-vim-to-just-fold-nothing-initially-still-allowi
+    autocmd BufWinEnter * let &foldlevel = max(map(range(1, line('$')), 'foldlevel(v:val)'))
     set list
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
@@ -180,14 +182,14 @@
     autocmd FileType c,ruby,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> | call StripTrailingWhitespace()
     "autocmd FileType go autocmd BufWritePre <buffer> Fmt
     autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
-    autocmd FileType haskell,puppet,ruby,yaml,coffee setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
+    autocmd FileType ruby,yaml,coffee,css,scss setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
     " preceding line best in a plugin but here for now.
     autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 " }
 
 " Key (re)Mappings {
     " remap leader
-    let mapleader = ','
+    let mapleader = ' '
     let maplocalleader = '_'
     " disable F1 from triggering help
     nmap <F1> <nop>
@@ -195,10 +197,10 @@
     noremap j gj
     noremap k gk
     " remap esc key in insert mode
-    :imap jk <Esc>
+    imap fd <Esc>
     " remap as we use commands frequently
-    :noremap ; :
-
+    noremap ; :
+    noremap <space> ;
     " map for inserting new line without entering insert mode
     nmap oo o<Esc>k
     nmap OO O<Esc>j
@@ -465,7 +467,7 @@
         endif
     " }
 
-    " ack.vim
+    " ack.vim {
         let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
     " }
 
@@ -568,25 +570,12 @@
         autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
         autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
         autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-        autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
         " ruby autocompletion
         autocmd FileType ruby let g:rubycomplete_buffer_loading=1
-        autocmd FileType ruby let g:rubycomplete_classes_in_global=1
-        autocmd FileType ruby let g:rubycomplete_rails = 1
 
-        " Haskell post write lint and check with ghcmod
-        " $ `cabal install ghcmod` if missing and ensure
-        " ~/.cabal/bin is in your $PATH.
-        if !executable("ghcmod")
-            autocmd BufWritePost *.hs GhcModCheckAndLintAsync
-        endif
-
-        " For snippet_complete marker.
-        if !exists("g:spf13_no_conceal")
-            if has('conceal')
-                set conceallevel=2 concealcursor=i
-            endif
+        if has('conceal')
+            set conceallevel=2 concealcursor=i
         endif
 
         " Disable the neosnippet preview candidate window
