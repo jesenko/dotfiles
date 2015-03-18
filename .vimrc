@@ -200,7 +200,6 @@
     imap fd <Esc>
     " remap as we use commands frequently
     noremap ; :
-    noremap <space> ;
     " map for inserting new line without entering insert mode
     nmap oo o<Esc>k
     nmap OO O<Esc>j
@@ -322,7 +321,9 @@
     " FIXME: Revert this f70be548
     " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
     map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
-
+    " spacemacs bindings for future migration
+    nmap <Leader>fs :w<CR>
+    nmap <Leader>fed :e ~/.vimrc<CR>
 " }
 
 " Plugins {
