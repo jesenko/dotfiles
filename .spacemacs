@@ -64,7 +64,7 @@ before layers configuration."
    ;; Emacs commands (M-x).
    ;; By default the command key is `:' so ex-commands are executed like in Vim
    ;; with `:' and Emacs commands are executed with `<leader> :'.
-   dotspacemacs-command-key ":"
+   dotspacemacs-command-key ";"
    ;; If non nil the paste micro-state is enabled. While enabled pressing `p`
    ;; several times cycle between the kill ring content.
    dotspacemacs-enable-paste-micro-state t
@@ -118,21 +118,23 @@ before layers configuration."
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
   (global-linum-mode)
-  ;; (setq multi-term-program-switches "--login")
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 2)
+  (setq-default standard-indent 2)
+  (setq-default c-basic-offset 2)
+  (setq js2-basic-offset 2)
+  ;; Search for projectile root top-down so we can detect project within project
+  ;; (e.g. ember app within rails app)
   (setq projectile-project-root-files-functions '(projectile-root-top-down
                                                   projectile-root-bottom-up))
   ;; Use Emacs terminfo, not system terminfo
   (setq system-uses-terminfo nil)
+  ;; Add basic support for wrapping of ruby code
+  (add-to-list 'hs-special-modes-alist
+               '(enh-ruby-mode
+                 "\\(def\\|do\\|{\\)" "\\(end\\|end\\|}\\)" "#"
+                 (lambda (arg) (enh-ruby-end-of-block)) nil))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(js2-basic-offset 2)
-)
