@@ -123,10 +123,13 @@ layers configuration."
   (setq-default standard-indent 2)
   (setq-default c-basic-offset 2)
   (setq js2-basic-offset 2)
+  (setq js-indent-level 2)
+  (setq css-indent-offset 2)
   ;; Search for projectile root top-down so we can detect project within project
   ;; (e.g. ember app within rails app)
   (setq projectile-project-root-files-functions '(projectile-root-top-down
                                                   projectile-root-bottom-up))
+  (setq projectile-ignored-directories (append (projectile-ignored-directories) '("bower_components" "node_modules")))
   ;; Use Emacs terminfo, not system terminfo
   (setq system-uses-terminfo nil)
   ;; Add basic support for wrapping of ruby code
@@ -134,7 +137,11 @@ layers configuration."
                '(enh-ruby-mode
                  "\\(def\\|do\\|{\\)" "\\(end\\|end\\|}\\)" "#"
                  (lambda (arg) (enh-ruby-end-of-block)) nil))
-)
+  (evil-leader/set-key "of" 'neotree-find)
+  ;; ruby indentation settings
+  (setq enh-ruby-bounce-deep-indent t)
+  (setq enh-ruby-hanging-brace-indent-level 2)
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
