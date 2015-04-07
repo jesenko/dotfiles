@@ -82,3 +82,7 @@ alias nombom='npm cache clear && bower cache clean && rm -rf node_modules bower_
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export NVM_DIR="/Users/jesenko/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export GOPATH="/Users/jesenko/work/go"
+export PATH="$PATH:$GOPATH/bin"
