@@ -10,14 +10,16 @@
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
-   dotspacemacs-configuration-layers '(company-mode
-                                       git
+   dotspacemacs-configuration-layers '(git
                                        ruby
                                        javascript
                                        colors
                                        markdown
                                        html
-                                       go)
+                                       go
+                                       perspectives
+                                       auto-completion
+                                       syntax-checking)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -117,7 +119,6 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
-  (global-linum-mode)
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 2)
   (setq-default standard-indent 2)
@@ -129,7 +130,8 @@ layers configuration."
   ;; (e.g. ember app within rails app)
   (setq projectile-project-root-files-functions '(projectile-root-top-down
                                                   projectile-root-bottom-up))
-  (setq projectile-ignored-directories (append (projectile-ignored-directories) '("bower_components" "node_modules")))
+  (setq projectile-ignored-directories (append '(projectile-ignored-directories) '("bower_components"
+                                                                                  "node_modules")))
   ;; Use Emacs terminfo, not system terminfo
   (setq system-uses-terminfo nil)
   ;; Add basic support for wrapping of ruby code
