@@ -11,6 +11,9 @@
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers '(git
+                                       auto-completion
+                                       syntax-checking
+                                       better-defaults
                                        ruby
                                        javascript
                                        colors
@@ -18,8 +21,8 @@
                                        html
                                        go
                                        perspectives
-                                       auto-completion
-                                       syntax-checking)
+                                       emacs-lisp
+                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -143,6 +146,24 @@ layers configuration."
   ;; ruby indentation settings
   (setq enh-ruby-bounce-deep-indent t)
   (setq enh-ruby-hanging-brace-indent-level 2)
+  ;; scroll compile output
+  (setq compilation-scroll-output t)
+  ;; make helm buffer wider to display full file names
+  (setq helm-buffer-max-length 40)
+  ;; until cache invalidation is automatic, disable projectile caching
+  (setq projectile-enable-caching nil)
+  ;; do not enable full backtrace with rspec
+  (setq ruby-test-rspec-options '())
+  )
+;; override defaul ruby test command to use spring
+(eval-after-load "ruby-test-mode"
+  '(defun ruby-test-spec-command (filename &optional line-number)
+    (let (command options)
+      (setq command "bundle exec spring rspec")
+      (setq options ruby-test-rspec-options)
+      (if line-number
+          (setq filename (format "%s:%s" filename line)))
+      (format "%s %s %s" command (mapconcat 'identity options " ") filename)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
