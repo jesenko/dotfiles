@@ -129,6 +129,8 @@ layers configuration."
   (setq js2-basic-offset 2)
   (setq js-indent-level 2)
   (setq css-indent-offset 2)
+  (setq sh-basic-offset 2)
+  (setq sh-indentation 2)
   ;; Search for projectile root top-down so we can detect project within project
   ;; (e.g. ember app within rails app)
   (setq projectile-project-root-files-functions '(projectile-root-top-down
