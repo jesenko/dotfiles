@@ -15,6 +15,10 @@
                                        syntax-checking
                                        better-defaults
                                        ruby
+                                       ruby-on-rails
+                                       react
+                                       erlang
+                                       elixir
                                        javascript
                                        colors
                                        markdown
@@ -22,7 +26,14 @@
                                        go
                                        perspectives
                                        emacs-lisp
+                                       org
+                                       shell
                                        )
+   ;; List of additional packages that will be installed without being
+   ;; wrapped in a layer. If you need some configuration for these
+   ;; packages then consider to create a layer, you can also put the
+   ;; configuration in `dotspacemacs/config'.
+   dotspacemacs-additional-packages '(editorconfig)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -136,7 +147,7 @@ layers configuration."
   (setq projectile-project-root-files-functions '(projectile-root-top-down
                                                   projectile-root-bottom-up))
   (setq projectile-ignored-directories (append '(projectile-ignored-directories) '("bower_components"
-                                                                                  "node_modules")))
+                                                                                   "node_modules")))
   ;; Use Emacs terminfo, not system terminfo
   (setq system-uses-terminfo nil)
   ;; Add basic support for wrapping of ruby code
@@ -156,6 +167,9 @@ layers configuration."
   (setq projectile-enable-caching nil)
   ;; do not enable full backtrace with rspec
   (setq ruby-test-rspec-options '())
+  (setq flycheck-disabled-checkers '(javascript-jshint))
+  (setq flycheck-checkers '(javascript-eslint))
+  (setq neo-show-hidden-files nil)
   )
 ;; override defaul ruby test command to use spring
 (eval-after-load "ruby-test-mode"
