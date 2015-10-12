@@ -126,7 +126,11 @@ before layers configuration."
    ;; user RVM for ruby version management
    ruby-version-manager 'rvm
    ;; enable rails support
-   ruby-enable-ruby-on-rails-support t)
+   ruby-enable-ruby-on-rails-support t
+   )
+  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+
+  (add-to-list 'package-pinned-packages '(magit . "melpa-stable") t)
   )
 
 (defun dotspacemacs/config ()
@@ -142,6 +146,8 @@ layers configuration."
   (setq css-indent-offset 2)
   (setq sh-basic-offset 2)
   (setq sh-indentation 2)
+  ;; set shift width to value used by majority of modes I currently use
+  (setq-default evil-shift-width 2)
   ;; Search for projectile root top-down so we can detect project within project
   ;; (e.g. ember app within rails app)
   (setq projectile-project-root-files-functions '(projectile-root-top-down
@@ -155,7 +161,6 @@ layers configuration."
                '(enh-ruby-mode
                  "\\(def\\|do\\|{\\)" "\\(end\\|end\\|}\\)" "#"
                  (lambda (arg) (enh-ruby-end-of-block)) nil))
-  (evil-leader/set-key "of" 'neotree-find)
   ;; ruby indentation settings
   (setq enh-ruby-bounce-deep-indent t)
   (setq enh-ruby-hanging-brace-indent-level 2)
@@ -170,6 +175,13 @@ layers configuration."
   (setq flycheck-disabled-checkers '(javascript-jshint))
   (setq flycheck-checkers '(javascript-eslint))
   (setq neo-show-hidden-files nil)
+  (add-to-list 'hs-special-modes-alist
+               '(elixir-mode
+                 "\\(def\\|do\\|{\\)" "\\(end\\|end\\|}\\)" "#" nil))
+  ;; custom shortcuts
+  (evil-leader/set-key "of" 'neotree-find)
+  (evil-leader/set-key "or" 'alchemist-mix-rerun-last-test)
+  (evil-leader/set-key "oh" `hs-hide-level)
   )
 ;; override defaul ruby test command to use spring
 (eval-after-load "ruby-test-mode"

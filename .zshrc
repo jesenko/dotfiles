@@ -64,8 +64,6 @@ alias rake='noglob rake'
 alias nombom='npm cache clear && bower cache clean && rm -rf node_modules bower_components && npm install && bower install'
 # emacs client
 alias ec='emacsclient'
-# run emacs GUI
-alias emacs='open -a /Applications/Emacs.app --args "$@"'
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
