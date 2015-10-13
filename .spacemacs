@@ -193,6 +193,43 @@ layers configuration."
           (setq filename (format "%s:%s" filename line)))
       (format "%s %s %s" command (mapconcat 'identity options " ") filename)))
   )
+;; override switching of project / tests in phoenix until
+;; https://github.com/tonini/alchemist.el/issues/163 is solved upstream.
+(eval-after-load "alchemist"
+  `(progn
+     (defun alchemist--project-open-file-for-current-tests (toggler)
+       "Open the appropriate implementation file for the current buffer by calling TOGGLER with filename."
+       (let* ((filename (alchemist--project-filename-for-current-tests "web/"))
+              (filename
+               (if (file-exists-p filename)
+                   filename
+                 (alchemist--project-filename-for-current-tests "lib/"))))
+         (funcall toggler filename))
+       )
+
+     (defun alchemist--project-filename-for-current-tests (base-dir)
+       "Generates filename for implementation file in project root BASE-DIR."
+       (let* ((filename (file-relative-name (buffer-file-name) (alchemist-project-root)))
+              (filename (replace-regexp-in-string "^test/" base-dir filename))
+              (filename (replace-regexp-in-string "_test\.exs$" "\.ex" filename))
+              (filename (format "%s/%s" (alchemist-project-root) filename)))
+         filename))
+
+     (defun alchemist--project-open-tests-for-current-file (toggler)
+       "Opens the appropriate test file by calling TOGGLER with filename."
+       (let* ((filename (file-relative-name (buffer-file-name) (alchemist-project-root)))
+              (filename (replace-regexp-in-string "^lib/" "test/" filename))
+              (filename (replace-regexp-in-string "^web/" "test/" filename))
+              (filename (replace-regexp-in-string "\.ex$" "_test\.exs" filename))
+              (filename (format "%s/%s" (alchemist-project-root) filename)))
+         (if (file-exists-p filename)
+             (funcall toggler filename)
+           (if (y-or-n-p "No test file found; create one now?")
+               (alchemist-project--create-test-for-current-file
+                filename (current-buffer))
+             (message "No test file found.")))))
+     )
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
