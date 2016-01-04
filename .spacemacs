@@ -33,7 +33,7 @@
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(editorconfig)
+   dotspacemacs-additional-packages '(editorconfig nginx-mode string-inflection)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -182,6 +182,7 @@ layers configuration."
   (evil-leader/set-key "of" 'neotree-find)
   (evil-leader/set-key "or" 'alchemist-mix-rerun-last-test)
   (evil-leader/set-key "oh" `hs-hide-level)
+  (evil-leader/set-key "oc" `string-inflection-lower-camelcase)
   )
 ;; override defaul ruby test command to use spring
 (eval-after-load "ruby-test-mode"
