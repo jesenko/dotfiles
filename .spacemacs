@@ -128,9 +128,6 @@ before layers configuration."
    ;; enable rails support
    ruby-enable-ruby-on-rails-support t
    )
-  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
-
-  (add-to-list 'package-pinned-packages '(magit . "melpa-stable") t)
   )
 
 (defun dotspacemacs/config ()
