@@ -5,6 +5,23 @@
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration."
   (setq-default
+   ;; Base distribution to use. This is a layer contained in the directory
+   ;; `+distribution'. For now available distributions are `spacemacs-base'
+   ;; or `spacemacs'. (default 'spacemacs)
+   dotspacemacs-distribution 'spacemacs
+   ;; Lazy installation of layers (i.e. layers are installed only when a file
+   ;; with a supported type is opened). Possible values are `all', `unused'
+   ;; and `nil'. `unused' will lazy install only unused layers (i.e. layers
+   ;; not listed in variable `dotspacemacs-configuration-layers'), `all' will
+   ;; lazy install any layer that support lazy installation even the layers
+   ;; listed in `dotspacemacs-configuration-layers'. `nil' disable the lazy
+   ;; installation feature and you have to explicitly list a layer in the
+   ;; variable `dotspacemacs-configuration-layers' to install it.
+   ;; (default 'unused)
+   dotspacemacs-enable-lazy-installation 'unused
+   ;; If non-nil then Spacemacs will ask for confirmation before installing
+   ;; a layer lazily. (default t)
+   dotspacemacs-ask-for-lazy-installation t
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
@@ -33,12 +50,18 @@
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages '(editorconfig nginx-mode string-inflection)
-   ;; A list of packages and/or extensions that will not be install and loaded.
+   ;; A list of packages that cannot be updated.
+   dotspacemacs-frozen-packages '()
+   ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '()
-   ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
-   ;; are declared in a layer which is not a member of
-   ;; the list `dotspacemacs-configuration-layers'
-   dotspacemacs-delete-orphan-packages t))
+   ;; Defines the behaviour of Spacemacs when installing packages.
+   ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
+   ;; `used-only' installs only explicitly used packages and uninstall any
+   ;; unused packages as well as their unused dependencies.
+   ;; `used-but-keep-unused' installs only the used packages but won't uninstall
+   ;; them if they become unused. `all' installs *all* packages supported by
+   ;; Spacemacs and never uninstall them. (default is `used-only')
+   dotspacemacs-install-packages 'used-only))
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -75,61 +98,6 @@ before layers configuration."
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
-   ;; The leader key
-   dotspacemacs-leader-key "SPC"
-   ;; The leader key accessible in `emacs state' and `insert state'
-   ;; (default "M-m")
-   dotspacemacs-emacs-leader-key "M-m"
-   ;; Major mode leader key is a shortcut key which is the equivalent of
-   ;; pressing `<leader> m`. Set it to `nil` to disable it.
-   dotspacemacs-major-mode-leader-key ","
-   ;; The command key used for Evil commands (ex-commands) and
-   ;; Emacs commands (M-x).
-   ;; By default the command key is `:' so ex-commands are executed like in Vim
-   ;; with `:' and Emacs commands are executed with `<leader> :'.
-   dotspacemacs-command-key ";"
-   ;; If non nil the paste micro-state is enabled. While enabled pressing `p`
-   ;; several times cycle between the kill ring content.
-   dotspacemacs-enable-paste-micro-state t
-   ;; Guide-key delay in seconds. The Guide-key is the popup buffer listing
-   ;; the commands bound to the current keystrokes.
-   dotspacemacs-guide-key-delay 0.4
-   ;; If non nil a progress bar is displayed when spacemacs is loading. This
-   ;; may increase the boot time on some systems and emacs builds, set it to
-   ;; nil ;; to boost the loading time.
-   dotspacemacs-loading-progress-bar t
-   ;; If non nil the frame is fullscreen when Emacs starts up.
-   ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup nil
-   ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
-   ;; Use to disable fullscreen animations in OSX."
-   dotspacemacs-fullscreen-use-non-native nil
-   ;; If non nil the frame is maximized when Emacs starts up.
-   ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
-   ;; (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
-   ;; A value from the range (0..100), in increasing opacity, which describes
-   ;; the transparency level of a frame when it's active or selected.
-   ;; Transparency can be toggled through `toggle-transparency'.
-   dotspacemacs-active-transparency 90
-   ;; A value from the range (0..100), in increasing opacity, which describes
-   ;; the transparency level of a frame when it's inactive or deselected.
-   ;; Transparency can be toggled through `toggle-transparency'.
-   dotspacemacs-inactive-transparency 90
-   ;; If non nil unicode symbols are displayed in the mode line.
-   dotspacemacs-mode-line-unicode-symbols t
-   ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
-   ;; scrolling overrides the default behavior of Emacs which recenters the
-   ;; point when it reaches the top or bottom of the screen.
-   dotspacemacs-smooth-scrolling t
-   ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
-   dotspacemacs-smartparens-strict-mode nil
-   ;; If non nil advises quit functions to keep server open when quitting.
-   dotspacemacs-persistent-server nil
-   ;; The default package repository used if no explicit repository has been
-   ;; specified with an installed package.
-   ;; Not used for now.
-   dotspacemacs-default-package-repository nil
    ;; user RVM for ruby version management
    ruby-version-manager 'rvm
    ;; enable rails support
