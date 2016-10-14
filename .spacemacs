@@ -41,7 +41,6 @@
                                        colors
                                        markdown
                                        html
-                                       go
                                        emacs-lisp
                                        org
                                        shell
