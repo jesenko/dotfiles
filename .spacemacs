@@ -28,7 +28,9 @@
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
-   dotspacemacs-configuration-layers '(git
+   dotspacemacs-configuration-layers '(
+                                       git
+                                       yaml
                                        auto-completion
                                        syntax-checking
                                        better-defaults
