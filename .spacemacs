@@ -152,6 +152,7 @@ layers configuration."
   (add-to-list 'hs-special-modes-alist
                '(elixir-mode
                  "\\(def\\|do\\|{\\)" "\\(end\\|end\\|}\\)" "#" nil))
+  (add-to-list 'spacemacs-indent-sensitive-modes 'elixir-mode)
   ;; custom shortcuts
   (evil-leader/set-key "of" 'neotree-find)
   (evil-leader/set-key "or" 'alchemist-mix-rerun-last-test)
