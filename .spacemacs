@@ -170,5 +170,92 @@ layers configuration."
       (format "%s %s %s" command (mapconcat 'identity options " ") filename)))
   )
 
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
+(defun sf-extract-regexp (regexp)
+  "Like 'occur' but only lists the matches for REGEXP and not the lines."
+  (interactive "sRegexp: ")
+  (save-excursion
+    (goto-char (point-min))
+    (let* ((result-buffer-name "*extract-regex-result*")
+           (result-buffer (get-buffer result-buffer-name))
+
+           (prefix-face list-matching-lines-prefix-face)
+           (marker nil)
+           (matchbeg nil)
+           (once nil))
+
+      (when result-buffer
+        (kill-buffer result-buffer))
+
+      (while (search-forward-regexp regexp nil t)
+        ;; only run once (setup the result buffer)
+        (when (not once)
+          (with-current-buffer (get-buffer-create result-buffer-name)
+            (insert (concat "Extract Regex Results for \"" regexp "\":\n\n"))
+              (display-buffer "*extract-regex-result*") ;; later
+              (setq result-buffer (current-buffer)))
+          (setq once t))
+
+        (setq matchbeg (match-beginning 0))
+        (setq marker (make-marker))
+        (set-marker marker matchbeg)
+
+        ;; more or less copied from replace.el (occur-engine function)
+        (let* ((curr-line (count-lines 1 (point)))
+               (curstring (match-string 0))
+               (match-prefix
+                ;; Using 7 digits aligns tabs properly.
+                (apply #'propertize (format "%7d:" curr-line)
+                       (append
+                        (when prefix-face
+                          `(font-lock-face ,prefix-face))
+                        `(occur-prefix t mouse-face (highlight)
+                                       ;; Allow insertion of text at
+                                       ;; the end of the prefix (for
+                                       ;; Occur Edit mode).
+                                       front-sticky t rear-nonsticky t
+                                       occur-target ,marker follow-link t
+                                       help-echo "mouse-2: go to this occurrence"))))
+               (match-str
+                ;; We don't put `mouse-face' on the newline,
+                ;; because that loses.  And don't put it
+                ;; on context lines to reduce flicker.
+                (propertize curstring 'mouse-face (list 'highlight)
+                            'occur-target marker
+                            'follow-link t
+                            'help-echo
+                            "mouse-2: go to this occurrence"))
+               (out-line
+                (concat
+                 match-prefix
+                 ;; Add non-numeric prefix to all non-first lines
+                 ;; of multi-line matches.
+                 (replace-regexp-in-string
+                  "\n"
+                  (if prefix-face
+                      (propertize "\n       :" 'font-lock-face prefix-face)
+                    "\n       :")
+                  match-str)
+                 ;; Add marker at eol, but no mouse props.
+                 (propertize "\n" 'occur-target marker))))
+          (with-current-buffer result-buffer
+            (insert out-line))))
+
+      (if (not once)
+          (message "No match found")
+        (with-current-buffer result-buffer
+          (occur-mode))))))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (packed request yasnippet smartparens magit magit-popup git-commit auto-complete helm helm-core simple-httpd tide typescript-mode yaml-mode xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit string-inflection spacemacs-theme spaceline solarized-theme smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs rbenv rainbow-mode rainbow-identifiers rainbow-delimiters quelpa pug-mode projectile-rails popwin persp-mode paradox orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file ob-elixir nginx-mode neotree mwim multi-term move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flycheck-pos-tip flycheck-mix flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help erlang emmet-mode elisp-slime-nav editorconfig dumb-jump define-word csv-mode company-web company-tern company-statistics column-enforce-mode color-identifiers-mode coffee-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-compile alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
