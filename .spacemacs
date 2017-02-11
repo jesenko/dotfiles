@@ -95,11 +95,11 @@ before layers configuration."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+   dotspacemacs-default-font '("Meslo LG M for Powerline"
+                               :size 12
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.2)
    ;; user RVM for ruby version management
    ruby-version-manager 'rvm
    ;; enable rails support
@@ -152,6 +152,9 @@ layers configuration."
   (add-to-list 'hs-special-modes-alist
                '(elixir-mode
                  "\\(def\\|do\\|{\\)" "\\(end\\|end\\|}\\)" "#" nil))
+  (setq powerline-default-separator 'utf-8)
+  (spaceline-compile)
+
   (add-to-list 'spacemacs-indent-sensitive-modes 'elixir-mode)
   ;; custom shortcuts
   (evil-leader/set-key "of" 'neotree-find)
