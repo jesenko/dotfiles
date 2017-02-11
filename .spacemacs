@@ -126,17 +126,13 @@ layers configuration."
   (setq-default evil-shift-width 2)
   ;; Search for projectile root top-down so we can detect project within project
   ;; (e.g. ember app within rails app)
+  (setq projectile-project-root-files '("rebar.config" "project.clj" "build.boot" "SConstruct" "pom.xml" "build.sbt" "gradlew" "build.gradle" ".ensime" "Gemfile" "requirements.txt" "setup.py" "tox.ini" "package.json" "gulpfile.js" "Gruntfile.js" "bower.json" "composer.json" "Cargo.toml" "mix.exs" "stack.yaml" "info.rkt" "DESCRIPTION"))
   (setq projectile-project-root-files-functions '(projectile-root-top-down
                                                   projectile-root-bottom-up))
   (setq projectile-ignored-directories (append '(projectile-ignored-directories) '("bower_components"
                                                                                    "node_modules")))
   ;; Use Emacs terminfo, not system terminfo
   (setq system-uses-terminfo nil)
-  ;; Add basic support for wrapping of ruby code
-  (add-to-list 'hs-special-modes-alist
-               '(enh-ruby-mode
-                 "\\(def\\|do\\|{\\)" "\\(end\\|end\\|}\\)" "#"
-                 (lambda (arg) (enh-ruby-end-of-block)) nil))
   ;; ruby indentation settings
   (setq enh-ruby-bounce-deep-indent t)
   (setq enh-ruby-hanging-brace-indent-level 2)
@@ -151,11 +147,13 @@ layers configuration."
   (setq flycheck-disabled-checkers '(javascript-jshint))
   (setq flycheck-checkers '(javascript-eslint))
   (setq neo-show-hidden-files nil)
-  (add-to-list 'hs-special-modes-alist
-               '(elixir-mode
-                 "\\(def\\|do\\|{\\)" "\\(end\\|end\\|}\\)" "#" nil))
   (setq powerline-default-separator 'utf-8)
   (spaceline-compile)
+
+  ;; Stop asking about following symlinks
+  (setq vc-follow-symlinks t)
+  ;; Stop asking me "Keep current list of tags tables also?"
+  (setq tags-add-tables nil)
 
   (add-to-list 'spacemacs-indent-sensitive-modes 'elixir-mode)
   ;; custom shortcuts
