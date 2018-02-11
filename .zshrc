@@ -93,3 +93,8 @@ export GOPATH="/Users/jesenko/work/go"
 export PATH="$PATH:$GOPATH/bin"
 # enable elixir shell history
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+# paths for android usage in react-native
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
