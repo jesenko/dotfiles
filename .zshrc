@@ -58,6 +58,7 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='ec'
 
 # You may need to manually set your language environment
+export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 alias rake='noglob rake'
 # Reinstalls npm and bower dependencies
@@ -98,3 +99,5 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+# paths for python
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
