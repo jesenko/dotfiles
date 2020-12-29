@@ -46,7 +46,7 @@ values."
                                        ruby
                                        react
                                        erlang
-                                       elixir
+                                       (elixir :variables elixir-backend 'alchemist)
                                        (javascript :variables node-add-modules-path t)
                                        colors
                                        markdown
