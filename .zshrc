@@ -101,3 +101,5 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 # paths for python
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
+. /usr/local/opt/asdf/asdf.sh
